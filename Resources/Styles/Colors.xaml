@@ -5,27 +5,39 @@
 
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
-    <Color x:Key="Primary">#512BD4</Color>
-    <Color x:Key="PrimaryDark">#ac99ea</Color>
-    <Color x:Key="PrimaryDarkText">#242424</Color>
-    <Color x:Key="Secondary">#DFD8F7</Color>
-    <Color x:Key="SecondaryDarkText">#9880e5</Color>
-    <Color x:Key="Tertiary">#2B0B98</Color>
+    <!-- ===== Identidad de marca KuenTly ===== -->
+    <Color x:Key="Primary">#0D3B66</Color>
+    <Color x:Key="PrimaryDark">#5B9BD5</Color>
+    <Color x:Key="PrimaryDarkText">#14202E</Color>
+    <Color x:Key="Secondary">#B8E8E3</Color>
+    <Color x:Key="SecondaryDarkText">#7FD9CF</Color>
+    <Color x:Key="Tertiary">#007B72</Color>
 
     <Color x:Key="White">White</Color>
-    <Color x:Key="Black">Black</Color>
-    <Color x:Key="Magenta">#D600AA</Color>
-    <Color x:Key="MidnightBlue">#190649</Color>
-    <Color x:Key="OffBlack">#1f1f1f</Color>
+    <Color x:Key="Black">#1B2430</Color>
+    <Color x:Key="Turquesa">#00B4A6</Color>
+    <Color x:Key="MidnightBlue">#0A2E52</Color>
+    <Color x:Key="OffBlack">#101826</Color>
 
-    <Color x:Key="Gray100">#E1E1E1</Color>
-    <Color x:Key="Gray200">#C8C8C8</Color>
-    <Color x:Key="Gray300">#ACACAC</Color>
-    <Color x:Key="Gray400">#919191</Color>
-    <Color x:Key="Gray500">#6E6E6E</Color>
-    <Color x:Key="Gray600">#404040</Color>
-    <Color x:Key="Gray900">#212121</Color>
-    <Color x:Key="Gray950">#141414</Color>
+    <Color x:Key="Gray100">#E9ECEF</Color>
+    <Color x:Key="Gray200">#CED4DA</Color>
+    <Color x:Key="Gray300">#ACB4BD</Color>
+    <Color x:Key="Gray400">#8D97A1</Color>
+    <Color x:Key="Gray500">#6B7785</Color>
+    <Color x:Key="Gray600">#4A5560</Color>
+    <Color x:Key="Gray900">#1B2430</Color>
+    <Color x:Key="Gray950">#10151C</Color>
+
+    <!-- ===== Alias semánticos, para usar en pantallas nuevas ===== -->
+    <Color x:Key="AzulProfundo">#0D3B66</Color>
+    <Color x:Key="Superficie">#F5F7FA</Color>
+    <Color x:Key="TextoPrincipal">#1B2430</Color>
+    <Color x:Key="TextoSecundario">#6B7785</Color>
+
+    <!-- ===== Estados de cuenta ===== -->
+    <Color x:Key="EstadoAlDia">#00B4A6</Color>
+    <Color x:Key="EstadoMora">#E4572E</Color>
+    <Color x:Key="EstadoCancelada">#8D99AE</Color>
 
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
