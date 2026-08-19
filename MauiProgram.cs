@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using KuenTly.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace KuenTly
 {
@@ -16,10 +19,24 @@ namespace KuenTly
                 });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
-            return builder.Build();
+            builder.Services.AddDbContextFactory<KuenTlyDbContext>(options =>
+            {
+                var dbPath = Path.Combine(FileSystem.AppDataDirectory, "kuently.db");
+                options.UseSqlite($"Filename={dbPath}");
+            });
+
+            var app = builder.Build();
+
+            var dbContextFactory = app.Services.GetRequiredService<IDbContextFactory<KuenTlyDbContext>>();
+            using (var dbContext = dbContextFactory.CreateDbContext())
+            {
+                dbContext.Database.Migrate();
+            }
+
+            return app;
         }
     }
 }

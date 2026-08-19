@@ -62,14 +62,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.11" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.11">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Models\" />
-		<Folder Include="Enums\" />
-		<Folder Include="Data\" />
 		<Folder Include="Helpers\" />
 		<Folder Include="Services\Interfaces\" />
 		<Folder Include="Services\Implementations\" />
