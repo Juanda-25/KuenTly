@@ -62,6 +62,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.11" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.11">
 		  <PrivateAssets>all</PrivateAssets>
@@ -72,18 +73,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Helpers\" />
-		<Folder Include="Services\Interfaces\" />
-		<Folder Include="Services\Implementations\" />
-		<Folder Include="ViewModels\Base\" />
-		<Folder Include="ViewModels\Clientes\" />
 		<Folder Include="ViewModels\Abonos\" />
 		<Folder Include="ViewModels\Configuracion\" />
 		<Folder Include="ViewModels\Inicio\" />
 		<Folder Include="ViewModels\Reportes\" />
 		<Folder Include="ViewModels\Recordatorios\" />
 		<Folder Include="ViewModels\Ventas\" />
-		<Folder Include="Views\Clientes\" />
 		<Folder Include="Views\Abonos\" />
 		<Folder Include="Views\Configuracion\" />
 		<Folder Include="Views\Reportes\" />
@@ -92,9 +87,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Update="Views\Clientes\ClientesPage.xaml.cs">
+		  <DependentUpon>ClientesPage.xaml</DependentUpon>
+		</Compile>
 		<Compile Update="Views\Inicio\InicioPage.xaml.cs">
 			<DependentUpon>InicioPage.xaml</DependentUpon>
 		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\Clientes\ClienteFormPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Clientes\ClientesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:KuenTly.ViewModels.Clientes"
+             x:Class="KuenTly.Views.Clientes.ClienteFormPage"
+             x:DataType="vm:ClienteFormViewModel"
+             Title="{Binding Titulo}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+
+            <Label Text="Nombre completo *" Style="{StaticResource Caption}" />
+            <Entry Text="{Binding Nombre}" Placeholder="Ej: Juan Pérez" />
+
+            <Label Text="Teléfono *" Style="{StaticResource Caption}" />
+            <Entry Text="{Binding Telefono}" Placeholder="Ej: 3001234567" Keyboard="Telephone" />
+
+            <Label Text="Dirección" Style="{StaticResource Caption}" />
+            <Entry Text="{Binding Direccion}" Placeholder="Opcional" />
+
+            <Label Text="Zona / Barrio" Style="{StaticResource Caption}" />
+            <Entry Text="{Binding Zona}" Placeholder="Escribe o elige abajo" />
+            <Picker Title="Zonas ya usadas"
+                    ItemsSource="{Binding ZonasSugeridas}"
+                    SelectedItem="{Binding Zona}" />
+
+            <Label Text="Observaciones" Style="{StaticResource Caption}" />
+            <Editor Text="{Binding Observaciones}" AutoSize="TextChanges" Placeholder="Opcional" />
+
+            <Label Text="{Binding MensajeError}"
+                   TextColor="{StaticResource EstadoMora}"
+                   IsVisible="{Binding MensajeError, Converter={StaticResource StringNotEmptyConverter}}" />
+
+            <Button Text="Guardar" Command="{Binding GuardarCommand}" Margin="0,10,0,0" />
+            <Button Text="Cancelar" Command="{Binding CancelarCommand}" BackgroundColor="Transparent" TextColor="{StaticResource Primary}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

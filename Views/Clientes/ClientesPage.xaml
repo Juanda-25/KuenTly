@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:KuenTly.ViewModels.Clientes"
+             xmlns:models="clr-namespace:KuenTly.Models"
+             x:Class="KuenTly.Views.Clientes.ClientesPage"
+             x:DataType="vm:ClientesViewModel"
+             Title="Clientes">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+" Command="{Binding NuevoClienteCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="16,12">
+
+        <SearchBar Grid.Row="0"
+                   Placeholder="Buscar por nombre o teléfono"
+                   Text="{Binding TextoBusqueda}" />
+
+        <Picker Grid.Row="1"
+                Title="Filtrar por zona"
+                ItemsSource="{Binding Zonas}"
+                SelectedItem="{Binding ZonaSeleccionada}"
+                Margin="0,8,0,0" />
+
+        <Label Grid.Row="2"
+               Text="{Binding MensajeError}"
+               TextColor="{StaticResource EstadoMora}"
+               FontSize="12"
+               Margin="4,4,0,0" />
+
+        <RefreshView Grid.Row="3"
+                     IsRefreshing="{Binding IsBusy}"
+                     Command="{Binding CargarCommand}"
+                     Margin="0,8,0,0">
+
+            <CollectionView ItemsSource="{Binding Clientes}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding ClienteSeleccionado}">
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout VerticalOptions="Center" Padding="0,60,0,0">
+                        <Label Text="Todavía no tienes clientes registrados"
+                               Style="{StaticResource Caption}"
+                               HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Cliente">
+                        <Grid Padding="4,12" ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                <Label Text="{Binding Nombre}" Style="{StaticResource Titulo}" />
+                                <Label Text="{Binding Telefono}" Style="{StaticResource Caption}" />
+                            </VerticalStackLayout>
+
+                            <Label Grid.Column="1"
+                                   Text="{Binding Zona}"
+                                   Style="{StaticResource Caption}"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+
+</ContentPage>
