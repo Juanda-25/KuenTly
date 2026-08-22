@@ -1,8 +1,10 @@
 ﻿using KuenTly.Data;
 using KuenTly.Services.Implementations;
 using KuenTly.Services.Interfaces;
+using KuenTly.ViewModels.Abonos;
 using KuenTly.ViewModels.Clientes;
 using KuenTly.ViewModels.Ventas;
+using KuenTly.Views.Abonos;
 using KuenTly.Views.Clientes;
 using KuenTly.Views.Ventas;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +38,7 @@ namespace KuenTly
 
             builder.Services.AddSingleton<IClienteService, ClienteService>();
             builder.Services.AddSingleton<IVentaService, VentaService>();
+            builder.Services.AddSingleton<IAbonoService, AbonoService>();
 
             builder.Services.AddTransient<ClientesViewModel>();
             builder.Services.AddTransient<ClientesPage>();
@@ -45,6 +48,10 @@ namespace KuenTly
             builder.Services.AddTransient<ClienteDetallePage>();
             builder.Services.AddTransient<VentaFormViewModel>();
             builder.Services.AddTransient<VentaFormPage>();
+            builder.Services.AddTransient<VentaDetalleViewModel>();
+            builder.Services.AddTransient<VentaDetallePage>();
+            builder.Services.AddTransient<AbonoFormViewModel>();
+            builder.Services.AddTransient<AbonoFormPage>();
 
             var app = builder.Build();
 

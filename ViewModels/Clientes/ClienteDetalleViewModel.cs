@@ -22,6 +22,9 @@ namespace KuenTly.ViewModels.Clientes
         [ObservableProperty]
         public partial Cliente? Cliente { get; set; }
 
+        [ObservableProperty]
+        public partial VentaResumen? VentaSeleccionada { get; set; }
+
         public ObservableCollection<VentaResumen> Ventas { get; } = new();
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -79,6 +82,16 @@ namespace KuenTly.ViewModels.Clientes
         private async Task NuevaVentaAsync()
         {
             await Shell.Current.GoToAsync($"{nameof(Views.Ventas.VentaFormPage)}?ClienteId={_clienteId}");
+        }
+
+        partial void OnVentaSeleccionadaChanged(VentaResumen? value)
+        {
+            if (value is null)
+                return;
+
+            var id = value.Venta.Id;
+            VentaSeleccionada = null;
+            _ = Shell.Current.GoToAsync($"{nameof(Views.Ventas.VentaDetallePage)}?VentaId={id}");
         }
     }
 }

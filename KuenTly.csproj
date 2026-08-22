@@ -73,12 +73,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="ViewModels\Abonos\" />
 		<Folder Include="ViewModels\Configuracion\" />
 		<Folder Include="ViewModels\Inicio\" />
 		<Folder Include="ViewModels\Reportes\" />
 		<Folder Include="ViewModels\Recordatorios\" />
-		<Folder Include="Views\Abonos\" />
 		<Folder Include="Views\Configuracion\" />
 		<Folder Include="Views\Reportes\" />
 		<Folder Include="Views\Recordatorios\" />
@@ -97,6 +95,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\Abonos\AbonoFormPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Clientes\ClienteDetallePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -104,6 +105,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Clientes\ClientesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Ventas\VentaDetallePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Ventas\VentaFormPage.xaml">

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:KuenTly.ViewModels.Abonos"
+             x:Class="KuenTly.Views.Abonos.AbonoFormPage"
+             x:DataType="vm:AbonoFormViewModel"
+             Title="Registrar abono">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+
+            <Label Text="Fecha" Style="{StaticResource Caption}" />
+            <DatePicker Date="{Binding Fecha}" />
+
+            <Label Text="Valor del abono *" Style="{StaticResource Caption}" />
+            <Entry Text="{Binding Valor}" Keyboard="Numeric" Placeholder="Ej: 50000" />
+
+            <Label Text="Método de pago *" Style="{StaticResource Caption}" />
+            <Picker ItemsSource="{Binding MetodosPago}" SelectedItem="{Binding MetodoPago}" />
+
+            <Label Text="Referencia / comprobante" Style="{StaticResource Caption}" />
+            <Entry Text="{Binding Referencia}" Placeholder="Opcional" />
+
+            <Label Text="Observaciones" Style="{StaticResource Caption}" />
+            <Editor Text="{Binding Observaciones}" AutoSize="TextChanges" Placeholder="Opcional" />
+
+            <Label Text="{Binding MensajeError}"
+                   TextColor="{StaticResource EstadoMora}"
+                   IsVisible="{Binding MensajeError, Converter={StaticResource StringNotEmptyConverter}}" />
+
+            <Button Text="Guardar abono" Command="{Binding GuardarCommand}" Margin="0,10,0,0" />
+            <Button Text="Cancelar" Command="{Binding CancelarCommand}" BackgroundColor="Transparent" TextColor="{StaticResource Primary}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

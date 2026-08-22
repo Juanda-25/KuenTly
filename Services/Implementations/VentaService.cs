@@ -28,6 +28,17 @@ namespace KuenTly.Services.Implementations
             return ventas.Select(CrearResumen).ToList();
         }
 
+        public async Task<VentaResumen?> ObtenerResumenAsync(int ventaId)
+        {
+            using var context = await _contextFactory.CreateDbContextAsync();
+
+            var venta = await context.Ventas
+                .Include(v => v.Abonos)
+                .FirstOrDefaultAsync(v => v.Id == ventaId);
+
+            return venta is null ? null : CrearResumen(venta);
+        }
+
         public async Task<Venta?> ObtenerPorIdAsync(int id)
         {
             using var context = await _contextFactory.CreateDbContextAsync();

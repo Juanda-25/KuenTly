@@ -37,7 +37,8 @@
                     BackgroundColor="Transparent" TextColor="{StaticResource Turquesa}" FontSize="13" Padding="4" />
         </Grid>
 
-        <CollectionView Grid.Row="2" ItemsSource="{Binding Ventas}">
+        <CollectionView Grid.Row="2" ItemsSource="{Binding Ventas}"
+                        SelectionMode="Single" SelectedItem="{Binding VentaSeleccionada}">
             <CollectionView.EmptyView>
                 <Label Text="Este cliente todavía no tiene ventas registradas"
                        Style="{StaticResource Caption}"

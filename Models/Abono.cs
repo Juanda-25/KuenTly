@@ -20,6 +20,10 @@ namespace KuenTly.Models
 
         public bool Anulado { get; set; } = false;
 
+        public DateTime? FechaAnulacion { get; set; }
+
+        public string? MotivoAnulacion { get; set; }
+
         // Relación
         public Venta? Venta { get; set; }
     }

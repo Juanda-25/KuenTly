@@ -6,6 +6,8 @@ namespace KuenTly.Services.Interfaces
     {
         Task<List<VentaResumen>> ObtenerPorClienteAsync(int clienteId);
 
+        Task<VentaResumen?> ObtenerResumenAsync(int ventaId);
+
         Task<Venta?> ObtenerPorIdAsync(int id);
 
         Task<int> CrearAsync(Venta venta);
