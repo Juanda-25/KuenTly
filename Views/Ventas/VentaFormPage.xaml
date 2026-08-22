@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:KuenTly.ViewModels.Ventas"
+             x:Class="KuenTly.Views.Ventas.VentaFormPage"
+             x:DataType="vm:VentaFormViewModel"
+             Title="Nueva venta">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+
+            <Label Text="Fecha de venta" Style="{StaticResource Caption}" />
+            <DatePicker Date="{Binding FechaVenta}" />
+
+            <Label Text="Descripción *" Style="{StaticResource Caption}" />
+            <Editor Text="{Binding Descripcion}" AutoSize="TextChanges" Placeholder="Ej: 2 camisas, 1 jean y 1 vestido" />
+
+            <Label Text="Valor total *" Style="{StaticResource Caption}" />
+            <Entry Text="{Binding ValorTotal}" Keyboard="Numeric" Placeholder="Ej: 150000" />
+
+            <Label Text="Fecha de pago acordada *" Style="{StaticResource Caption}" Margin="0,10,0,0" />
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                <Button Grid.Column="0" Text="7 días" FontSize="13" Padding="4,8"
+                        Command="{Binding SeleccionarPlazoCommand}" CommandParameter="7" />
+                <Button Grid.Column="1" Text="15 días" FontSize="13" Padding="4,8"
+                        Command="{Binding SeleccionarPlazoCommand}" CommandParameter="15" />
+                <Button Grid.Column="2" Text="30 días" FontSize="13" Padding="4,8"
+                        Command="{Binding SeleccionarPlazoCommand}" CommandParameter="30" />
+            </Grid>
+            <DatePicker Date="{Binding FechaPagoAcordada}" />
+
+            <Label Text="{Binding MensajeError}"
+                   TextColor="{StaticResource EstadoMora}"
+                   IsVisible="{Binding MensajeError, Converter={StaticResource StringNotEmptyConverter}}" />
+
+            <Button Text="Guardar" Command="{Binding GuardarCommand}" Margin="0,10,0,0" />
+            <Button Text="Cancelar" Command="{Binding CancelarCommand}" BackgroundColor="Transparent" TextColor="{StaticResource Primary}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

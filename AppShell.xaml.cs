@@ -1,4 +1,5 @@
 ﻿using KuenTly.Views.Clientes;
+using KuenTly.Views.Ventas;
 
 namespace KuenTly
 {
@@ -9,6 +10,8 @@ namespace KuenTly
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(ClienteFormPage), typeof(ClienteFormPage));
+            Routing.RegisterRoute(nameof(ClienteDetallePage), typeof(ClienteDetallePage));
+            Routing.RegisterRoute(nameof(VentaFormPage), typeof(VentaFormPage));
         }
     }
 }

@@ -80,7 +80,7 @@ namespace KuenTly.ViewModels.Clientes
 
             var id = value.Id;
             ClienteSeleccionado = null;
-            _ = Shell.Current.GoToAsync($"{nameof(Views.Clientes.ClienteFormPage)}?ClienteId={id}");
+            _ = Shell.Current.GoToAsync($"{nameof(Views.Clientes.ClienteDetallePage)}?ClienteId={id}");
         }
     }
 }

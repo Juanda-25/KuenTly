@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:KuenTly.ViewModels.Clientes"
+             xmlns:models="clr-namespace:KuenTly.Models"
+             x:Class="KuenTly.Views.Clientes.ClienteDetallePage"
+             x:DataType="vm:ClienteDetalleViewModel"
+             Title="Detalle del cliente">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Editar" Command="{Binding EditarCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="20,16">
+
+        <VerticalStackLayout Grid.Row="0" Spacing="10">
+            <Label Text="{Binding Cliente.Nombre}" Style="{StaticResource Headline}" FontSize="24" />
+
+            <VerticalStackLayout Spacing="4">
+                <Label Text="{Binding Cliente.Telefono}" Style="{StaticResource Caption}" />
+                <Label Text="{Binding Cliente.Direccion}" Style="{StaticResource Caption}"
+                       IsVisible="{Binding Cliente.Direccion, Converter={StaticResource StringNotEmptyConverter}}" />
+                <Label Text="{Binding Cliente.Zona}" Style="{StaticResource Caption}"
+                       IsVisible="{Binding Cliente.Zona, Converter={StaticResource StringNotEmptyConverter}}" />
+            </VerticalStackLayout>
+
+            <Button Text="Llamar" Command="{Binding LlamarCommand}" />
+
+            <Label Text="{Binding MensajeError}"
+                   TextColor="{StaticResource EstadoMora}"
+                   IsVisible="{Binding MensajeError, Converter={StaticResource StringNotEmptyConverter}}" />
+        </VerticalStackLayout>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto" Margin="0,16,0,8">
+            <Label Grid.Column="0" Text="Historial de ventas" Style="{StaticResource Titulo}" VerticalOptions="Center" />
+            <Button Grid.Column="1" Text="+ Nueva venta" Command="{Binding NuevaVentaCommand}"
+                    BackgroundColor="Transparent" TextColor="{StaticResource Turquesa}" FontSize="13" Padding="4" />
+        </Grid>
+
+        <CollectionView Grid.Row="2" ItemsSource="{Binding Ventas}">
+            <CollectionView.EmptyView>
+                <Label Text="Este cliente todavía no tiene ventas registradas"
+                       Style="{StaticResource Caption}"
+                       Margin="0,10,0,0" />
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:VentaResumen">
+                    <Border Stroke="{StaticResource Gray200}" StrokeShape="RoundRectangle 8" Margin="0,4" Padding="12">
+                        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto">
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Venta.Descripcion}" Style="{StaticResource Titulo}" FontSize="15" />
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Estado, Converter={StaticResource EstadoTextoConverter}}"
+                                   TextColor="{Binding Estado, Converter={StaticResource EstadoColorConverter}}"
+                                   FontAttributes="Bold" FontSize="13" />
+                            <Label Grid.Row="1" Grid.Column="0" Text="{Binding Venta.FechaVenta, StringFormat='{0:dd/MM/yyyy}'}" Style="{StaticResource Caption}" />
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Saldo, StringFormat='Saldo: $ {0:N0}'}" Style="{StaticResource Caption}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+
+</ContentPage>

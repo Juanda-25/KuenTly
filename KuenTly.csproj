@@ -78,12 +78,10 @@
 		<Folder Include="ViewModels\Inicio\" />
 		<Folder Include="ViewModels\Reportes\" />
 		<Folder Include="ViewModels\Recordatorios\" />
-		<Folder Include="ViewModels\Ventas\" />
 		<Folder Include="Views\Abonos\" />
 		<Folder Include="Views\Configuracion\" />
 		<Folder Include="Views\Reportes\" />
 		<Folder Include="Views\Recordatorios\" />
-		<Folder Include="Views\Ventas\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -93,13 +91,22 @@
 		<Compile Update="Views\Inicio\InicioPage.xaml.cs">
 			<DependentUpon>InicioPage.xaml</DependentUpon>
 		</Compile>
+		<Compile Update="Views\Ventas\VentaFormPage.xaml.cs">
+		  <DependentUpon>VentaFormPage.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\Clientes\ClienteDetallePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Clientes\ClienteFormPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Clientes\ClientesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Ventas\VentaFormPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
