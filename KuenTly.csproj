@@ -74,12 +74,9 @@
 
 	<ItemGroup>
 		<Folder Include="ViewModels\Configuracion\" />
-		<Folder Include="ViewModels\Inicio\" />
 		<Folder Include="ViewModels\Reportes\" />
-		<Folder Include="ViewModels\Recordatorios\" />
 		<Folder Include="Views\Configuracion\" />
 		<Folder Include="Views\Reportes\" />
-		<Folder Include="Views\Recordatorios\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -105,6 +102,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Clientes\ClientesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Recordatorios\RecordatorioFormPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Recordatorios\RecordatoriosPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Ventas\VentaDetallePage.xaml">

@@ -1,5 +1,6 @@
 ﻿using KuenTly.Views.Abonos;
 using KuenTly.Views.Clientes;
+using KuenTly.Views.Recordatorios;
 using KuenTly.Views.Ventas;
 
 namespace KuenTly
@@ -15,6 +16,7 @@ namespace KuenTly
             Routing.RegisterRoute(nameof(VentaFormPage), typeof(VentaFormPage));
             Routing.RegisterRoute(nameof(VentaDetallePage), typeof(VentaDetallePage));
             Routing.RegisterRoute(nameof(AbonoFormPage), typeof(AbonoFormPage));
+            Routing.RegisterRoute(nameof(RecordatorioFormPage), typeof(RecordatorioFormPage));
         }
     }
 }

@@ -1,36 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="KuenTly.Views.Inicio.InicioPage">
+             xmlns:vm="clr-namespace:KuenTly.ViewModels.Inicio"
+             xmlns:models="clr-namespace:KuenTly.Models"
+             x:Class="KuenTly.Views.Inicio.InicioPage"
+             x:DataType="vm:InicioViewModel"
+             Title="Inicio">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
-            <Image
-                Source="dotnet_bot.png"
-                HeightRequest="185"
-                Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a submarine number ten" />
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*" Padding="20,16" RowSpacing="12">
 
-            <Label
-                Text="Hello, World!"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
+        <Label Grid.Row="0" Text="Resumen general" Style="{StaticResource Titulo}" FontSize="20" />
 
-            <Label
-                Text="Bienvenido a la app KuenTly ;.NET Multi-platform App UI"
-                Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+        <Border Grid.Row="1" Stroke="{StaticResource Gray200}" StrokeShape="RoundRectangle 12"
+                BackgroundColor="{StaticResource Superficie}" Padding="16">
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Saldo total pendiente" Style="{StaticResource Caption}" />
+                <Label Text="{Binding SaldoTotalPendiente, StringFormat='$ {0:N0}'}" Style="{StaticResource MontoDestacado}" FontSize="30" />
+            </VerticalStackLayout>
+        </Border>
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me" 
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Fill" />
+        <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="12">
+            <Border Grid.Column="0" Stroke="{StaticResource Gray200}" StrokeShape="RoundRectangle 12" Padding="12">
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="{Binding VentasAlDia}" Style="{StaticResource MontoDestacado}" FontSize="22" TextColor="{StaticResource EstadoAlDia}" />
+                    <Label Text="Ventas al día" Style="{StaticResource Caption}" />
+                </VerticalStackLayout>
+            </Border>
+            <Border Grid.Column="1" Stroke="{StaticResource Gray200}" StrokeShape="RoundRectangle 12" Padding="12">
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="{Binding VentasEnMora}" Style="{StaticResource MontoDestacado}" FontSize="22" TextColor="{StaticResource EstadoMora}" />
+                    <Label Text="Ventas en mora" Style="{StaticResource Caption}" />
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <Label Grid.Row="3" Text="{Binding ClientesEnMora, StringFormat='{0} cliente(s) en mora'}" Style="{StaticResource Caption}" />
+
+        <VerticalStackLayout Grid.Row="4" Spacing="8">
+            <Label Text="Próximos recordatorios" Style="{StaticResource Titulo}" FontSize="16" />
+
+            <RefreshView IsRefreshing="{Binding IsBusy}" Command="{Binding CargarCommand}">
+                <CollectionView ItemsSource="{Binding ProximosRecordatorios}">
+                    <CollectionView.EmptyView>
+                        <Label Text="No tienes recordatorios pendientes" Style="{StaticResource Caption}" Margin="0,10,0,0" />
+                    </CollectionView.EmptyView>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Recordatorio">
+                            <Grid ColumnDefinitions="*,Auto" Padding="0,8">
+                                <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                    <Label Text="{Binding Cliente.Nombre}" Style="{StaticResource Titulo}" FontSize="14" />
+                                    <Label Text="{Binding Mensaje}" Style="{StaticResource Caption}" />
+                                </VerticalStackLayout>
+                                <Label Grid.Column="1" Text="{Binding Fecha, StringFormat='{0:dd/MM}'}" Style="{StaticResource Caption}" VerticalOptions="Center" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
         </VerticalStackLayout>
-    </ScrollView>
+
+    </Grid>
 
 </ContentPage>

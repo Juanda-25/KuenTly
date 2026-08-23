@@ -13,6 +13,7 @@
             <helpers:StringNotEmptyToBoolConverter x:Key="StringNotEmptyConverter" />
             <helpers:EstadoCuentaToTextoConverter x:Key="EstadoTextoConverter" />
             <helpers:EstadoCuentaToColorConverter x:Key="EstadoColorConverter" />
+            <helpers:CompletadoToAccionTextoConverter x:Key="CompletadoAccionConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

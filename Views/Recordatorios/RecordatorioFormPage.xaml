@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:KuenTly.ViewModels.Recordatorios"
+             x:Class="KuenTly.Views.Recordatorios.RecordatorioFormPage"
+             x:DataType="vm:RecordatorioFormViewModel"
+             Title="{Binding Titulo}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14">
+
+            <Label Text="Cliente *" Style="{StaticResource Caption}" />
+            <Picker Title="Elige un cliente" ItemsSource="{Binding Clientes}" ItemDisplayBinding="{Binding Nombre}" SelectedItem="{Binding ClienteSeleccionado}" />
+
+            <Label Text="Fecha *" Style="{StaticResource Caption}" />
+            <DatePicker Date="{Binding Fecha}" />
+
+            <Label Text="¿Qué debes recordar? *" Style="{StaticResource Caption}" />
+            <Editor Text="{Binding Mensaje}" AutoSize="TextChanges" Placeholder="Ej: Llamar para recordar el pago" />
+
+            <Label Text="{Binding MensajeError}"
+                   TextColor="{StaticResource EstadoMora}"
+                   IsVisible="{Binding MensajeError, Converter={StaticResource StringNotEmptyConverter}}" />
+
+            <Button Text="Guardar" Command="{Binding GuardarCommand}" Margin="0,10,0,0" />
+            <Button Text="Cancelar" Command="{Binding CancelarCommand}" BackgroundColor="Transparent" TextColor="{StaticResource Primary}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

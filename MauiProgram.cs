@@ -1,11 +1,13 @@
 ﻿using KuenTly.Data;
 using KuenTly.Services.Implementations;
 using KuenTly.Services.Interfaces;
-using KuenTly.ViewModels.Abonos;
 using KuenTly.ViewModels.Clientes;
+using KuenTly.ViewModels.Inicio;
+using KuenTly.ViewModels.Recordatorios;
 using KuenTly.ViewModels.Ventas;
-using KuenTly.Views.Abonos;
 using KuenTly.Views.Clientes;
+using KuenTly.Views.Inicio;
+using KuenTly.Views.Recordatorios;
 using KuenTly.Views.Ventas;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,7 +41,11 @@ namespace KuenTly
             builder.Services.AddSingleton<IClienteService, ClienteService>();
             builder.Services.AddSingleton<IVentaService, VentaService>();
             builder.Services.AddSingleton<IAbonoService, AbonoService>();
+            builder.Services.AddSingleton<IRecordatorioService, RecordatorioService>();
+            builder.Services.AddSingleton<IDashboardService, DashboardService>();
 
+            builder.Services.AddTransient<InicioViewModel>();
+            builder.Services.AddTransient<InicioPage>();
             builder.Services.AddTransient<ClientesViewModel>();
             builder.Services.AddTransient<ClientesPage>();
             builder.Services.AddTransient<ClienteFormViewModel>();
@@ -50,8 +56,12 @@ namespace KuenTly
             builder.Services.AddTransient<VentaFormPage>();
             builder.Services.AddTransient<VentaDetalleViewModel>();
             builder.Services.AddTransient<VentaDetallePage>();
-            builder.Services.AddTransient<AbonoFormViewModel>();
-            builder.Services.AddTransient<AbonoFormPage>();
+            builder.Services.AddTransient<Views.Abonos.AbonoFormPage>();
+            builder.Services.AddTransient<ViewModels.Abonos.AbonoFormViewModel>();
+            builder.Services.AddTransient<RecordatoriosViewModel>();
+            builder.Services.AddTransient<RecordatoriosPage>();
+            builder.Services.AddTransient<RecordatorioFormViewModel>();
+            builder.Services.AddTransient<RecordatorioFormPage>();
 
             var app = builder.Build();
 

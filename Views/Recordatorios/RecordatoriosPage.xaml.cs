@@ -1,12 +1,12 @@
-﻿using KuenTly.ViewModels.Inicio;
+using KuenTly.ViewModels.Recordatorios;
 
-namespace KuenTly.Views.Inicio
+namespace KuenTly.Views.Recordatorios
 {
-    public partial class InicioPage : ContentPage
+    public partial class RecordatoriosPage : ContentPage
     {
-        private readonly InicioViewModel _viewModel;
+        private readonly RecordatoriosViewModel _viewModel;
 
-        public InicioPage(InicioViewModel viewModel)
+        public RecordatoriosPage(RecordatoriosViewModel viewModel)
         {
             InitializeComponent();
             _viewModel = viewModel;

@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:inicio="clr-namespace:KuenTly.Views.Inicio"
     xmlns:clientes="clr-namespace:KuenTly.Views.Clientes"
+    xmlns:recordatorios="clr-namespace:KuenTly.Views.Recordatorios"
     Title="KuenTly">
 
     <TabBar>
@@ -17,6 +18,11 @@
             Title="Clientes"
             ContentTemplate="{DataTemplate clientes:ClientesPage}"
             Route="Clientes" />
+
+        <ShellContent
+            Title="Recordatorios"
+            ContentTemplate="{DataTemplate recordatorios:RecordatoriosPage}"
+            Route="Recordatorios" />
     </TabBar>
 
 </Shell>
