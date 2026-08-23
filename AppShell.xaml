@@ -6,6 +6,7 @@
     xmlns:inicio="clr-namespace:KuenTly.Views.Inicio"
     xmlns:clientes="clr-namespace:KuenTly.Views.Clientes"
     xmlns:recordatorios="clr-namespace:KuenTly.Views.Recordatorios"
+    xmlns:reportes="clr-namespace:KuenTly.Views.Reportes"
     Title="KuenTly">
 
     <TabBar>
@@ -23,6 +24,11 @@
             Title="Recordatorios"
             ContentTemplate="{DataTemplate recordatorios:RecordatoriosPage}"
             Route="Recordatorios" />
+
+        <ShellContent
+            Title="Reportes"
+            ContentTemplate="{DataTemplate reportes:ReportesPage}"
+            Route="Reportes" />
     </TabBar>
 
 </Shell>

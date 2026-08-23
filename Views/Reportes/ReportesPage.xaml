@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:KuenTly.ViewModels.Reportes"
+             xmlns:models="clr-namespace:KuenTly.Models"
+             x:Class="KuenTly.Views.Reportes.ReportesPage"
+             x:DataType="vm:ReportesViewModel"
+             Title="Reportes">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="16,12" RowSpacing="10">
+
+        <Picker Grid.Row="0" Title="Filtrar por zona"
+                ItemsSource="{Binding Zonas}" SelectedItem="{Binding ZonaSeleccionada}" />
+
+        <Picker Grid.Row="1" Title="Filtrar por estado"
+                ItemsSource="{Binding Estados}" SelectedItem="{Binding EstadoSeleccionado}" />
+
+        <Border Grid.Row="2" Stroke="{StaticResource Gray200}" StrokeShape="RoundRectangle 12"
+                BackgroundColor="{StaticResource Superficie}" Padding="16">
+            <Grid ColumnDefinitions="*,*">
+                <VerticalStackLayout Grid.Column="0" Spacing="2">
+                    <Label Text="{Binding TotalVentas}" Style="{StaticResource MontoDestacado}" FontSize="22" />
+                    <Label Text="Ventas" Style="{StaticResource Caption}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1" Spacing="2">
+                    <Label Text="{Binding TotalSaldo, StringFormat='$ {0:N0}'}" Style="{StaticResource MontoDestacado}" FontSize="22" />
+                    <Label Text="Saldo total" Style="{StaticResource Caption}" />
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
+        <RefreshView Grid.Row="3" IsRefreshing="{Binding IsBusy}" Command="{Binding CargarCommand}">
+            <CollectionView ItemsSource="{Binding Resultados}"
+                            SelectionMode="Single" SelectedItem="{Binding VentaSeleccionada}">
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout VerticalOptions="Center" Padding="0,40,0,0">
+                        <Label Text="No hay ventas que coincidan con estos filtros"
+                               Style="{StaticResource Caption}"
+                               HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:VentaResumen">
+                        <Border Stroke="{StaticResource Gray200}" StrokeShape="RoundRectangle 8" Margin="0,4" Padding="12">
+                            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto">
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding Venta.Cliente.Nombre}" Style="{StaticResource Titulo}" FontSize="15" />
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Estado, Converter={StaticResource EstadoTextoConverter}}"
+                                       TextColor="{Binding Estado, Converter={StaticResource EstadoColorConverter}}"
+                                       FontAttributes="Bold" FontSize="13" />
+                                <Label Grid.Row="1" Grid.Column="0" Text="{Binding Venta.Descripcion}" Style="{StaticResource Caption}" />
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Saldo, StringFormat='$ {0:N0}'}" Style="{StaticResource Caption}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+    </Grid>
+
+</ContentPage>

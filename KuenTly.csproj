@@ -74,9 +74,7 @@
 
 	<ItemGroup>
 		<Folder Include="ViewModels\Configuracion\" />
-		<Folder Include="ViewModels\Reportes\" />
 		<Folder Include="Views\Configuracion\" />
-		<Folder Include="Views\Reportes\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -108,6 +106,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Recordatorios\RecordatoriosPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Reportes\ReportesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Ventas\VentaDetallePage.xaml">

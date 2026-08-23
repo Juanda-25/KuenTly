@@ -35,6 +35,7 @@ namespace KuenTly.Services.Implementations
             var ventas = await context.Ventas
                 .Where(v => v.Activo)
                 .Include(v => v.Abonos)
+                .Include(v => v.Cliente)
                 .ToListAsync();
 
             return ventas.Select(CrearResumen).ToList();
