@@ -11,10 +11,14 @@ namespace KuenTly.ViewModels.Reportes
     public partial class ReportesViewModel : BaseViewModel
     {
         private readonly IReporteService _reporteService;
+        private readonly IPdfExportService _pdfExportService;
+        private readonly IExcelExportService _excelExportService;
 
-        public ReportesViewModel(IReporteService reporteService)
+        public ReportesViewModel(IReporteService reporteService, IPdfExportService pdfExportService, IExcelExportService excelExportService)
         {
             _reporteService = reporteService;
+            _pdfExportService = pdfExportService;
+            _excelExportService = excelExportService;
         }
 
         [ObservableProperty]
@@ -92,6 +96,57 @@ namespace KuenTly.ViewModels.Reportes
             var id = value.Venta.Id;
             VentaSeleccionada = null;
             _ = Shell.Current.GoToAsync($"{nameof(Views.Ventas.VentaDetallePage)}?VentaId={id}");
+        }
+
+        [RelayCommand]
+        private async Task ExportarPdfAsync()
+        {
+            if (Resultados.Count == 0)
+            {
+                MensajeError = "No hay ventas para exportar con estos filtros.";
+                return;
+            }
+
+            await EjecutarSeguroAsync(async () =>
+            {
+                var titulo = ConstruirTituloReporte();
+                var ruta = await _pdfExportService.ExportarVentasAsync(Resultados.ToList(), titulo);
+
+                await Share.Default.RequestAsync(new ShareFileRequest
+                {
+                    Title = "Compartir reporte de ventas",
+                    File = new ShareFile(ruta)
+                });
+            });
+        }
+
+        [RelayCommand]
+        private async Task ExportarExcelAsync()
+        {
+            if (Resultados.Count == 0)
+            {
+                MensajeError = "No hay ventas para exportar con estos filtros.";
+                return;
+            }
+
+            await EjecutarSeguroAsync(async () =>
+            {
+                var ruta = await _excelExportService.ExportarVentasAsync(Resultados.ToList());
+
+                await Share.Default.RequestAsync(new ShareFileRequest
+                {
+                    Title = "Compartir reporte de ventas",
+                    File = new ShareFile(ruta)
+                });
+            });
+        }
+
+        private string ConstruirTituloReporte()
+        {
+            var partes = new List<string>();
+            if (ZonaSeleccionada != "Todas") partes.Add($"Zona: {ZonaSeleccionada}");
+            if (EstadoSeleccionado != "Todos") partes.Add($"Estado: {EstadoSeleccionado}");
+            return partes.Count > 0 ? $"Reporte de ventas ({string.Join(", ", partes)})" : "Reporte de ventas (todas)";
         }
     }
 }

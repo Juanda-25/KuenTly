@@ -46,6 +46,8 @@ namespace KuenTly
             builder.Services.AddSingleton<IRecordatorioService, RecordatorioService>();
             builder.Services.AddSingleton<IDashboardService, DashboardService>();
             builder.Services.AddSingleton<IReporteService, ReporteService>();
+            builder.Services.AddSingleton<IPdfExportService, PdfExportService>();
+            builder.Services.AddSingleton<IExcelExportService, ExcelExportService>();
 
             builder.Services.AddTransient<InicioViewModel>();
             builder.Services.AddTransient<InicioPage>();

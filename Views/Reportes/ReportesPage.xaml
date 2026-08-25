@@ -7,7 +7,12 @@
              x:DataType="vm:ReportesViewModel"
              Title="Reportes">
 
-    <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="16,12" RowSpacing="10">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Excel" Command="{Binding ExportarExcelCommand}" />
+        <ToolbarItem Text="PDF" Command="{Binding ExportarPdfCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*" Padding="16,12" RowSpacing="10">
 
         <Picker Grid.Row="0" Title="Filtrar por zona"
                 ItemsSource="{Binding Zonas}" SelectedItem="{Binding ZonaSeleccionada}" />
@@ -29,7 +34,11 @@
             </Grid>
         </Border>
 
-        <RefreshView Grid.Row="3" IsRefreshing="{Binding IsBusy}" Command="{Binding CargarCommand}">
+        <Label Grid.Row="3" Text="{Binding MensajeError}"
+               TextColor="{StaticResource EstadoMora}"
+               IsVisible="{Binding MensajeError, Converter={StaticResource StringNotEmptyConverter}}" />
+
+        <RefreshView Grid.Row="4" IsRefreshing="{Binding IsBusy}" Command="{Binding CargarCommand}">
             <CollectionView ItemsSource="{Binding Resultados}"
                             SelectionMode="Single" SelectedItem="{Binding VentaSeleccionada}">
                 <CollectionView.EmptyView>

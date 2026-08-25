@@ -62,7 +62,7 @@ namespace KuenTly.ViewModels.Ventas
 
             if (abono.Anulado)
             {
-                await Shell.Current.DisplayAlert("Abono anulado", "Este abono ya fue anulado anteriormente.", "Entendido");
+                await Shell.Current.DisplayAlertAsync("Abono anulado", "Este abono ya fue anulado anteriormente.", "Entendido");
                 return;
             }
 
@@ -78,7 +78,7 @@ namespace KuenTly.ViewModels.Ventas
 
             if (string.IsNullOrWhiteSpace(motivo))
             {
-                await Shell.Current.DisplayAlert("Falta el motivo", "Debes escribir un motivo para anular el abono.", "Entendido");
+                await Shell.Current.DisplayAlertAsync("Falta el motivo", "Debes escribir un motivo para anular el abono.", "Entendido");
                 return;
             }
 
