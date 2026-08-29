@@ -4,6 +4,7 @@ using KuenTly.Services.Interfaces;
 using PdfSharp.Drawing;
 using PdfSharp.Fonts;
 using PdfSharp.Pdf;
+//using Colors = QuestPDF.Helpers.Colors;
 
 namespace KuenTly.Services.Implementations
 {
@@ -57,11 +58,11 @@ namespace KuenTly.Services.Implementations
             gfx.DrawString("Saldo", fontEncabezado, colorNegro, new XPoint(colSaldo, y));
             gfx.DrawString("Estado", fontEncabezado, colorNegro, new XPoint(colEstado, y));
             y += 5;
-            gfx.DrawLine(XPens.LightGray, margen, y, page.Width - margen, y);
+            gfx.DrawLine(XPens.LightGray, margen, y, page.Width.Point - margen, y);
             y += 16;
 
             const double altoLinea = 18;
-            double limiteInferior = page.Height - margen;
+            double limiteInferior = page.Height.Point - margen;
 
             foreach (var venta in ventas)
             {
