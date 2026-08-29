@@ -75,11 +75,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="ViewModels\Configuracion\" />
-		<Folder Include="Views\Configuracion\" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<Compile Update="Views\Clientes\ClientesPage.xaml.cs">
 		  <DependentUpon>ClientesPage.xaml</DependentUpon>
 		</Compile>
@@ -102,6 +97,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Clientes\ClientesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Configuracion\ConfiguracionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Recordatorios\RecordatorioFormPage.xaml">

@@ -2,11 +2,13 @@
 using KuenTly.Services.Implementations;
 using KuenTly.Services.Interfaces;
 using KuenTly.ViewModels.Clientes;
+using KuenTly.ViewModels.Configuracion;
 using KuenTly.ViewModels.Inicio;
 using KuenTly.ViewModels.Recordatorios;
 using KuenTly.ViewModels.Reportes;
 using KuenTly.ViewModels.Ventas;
 using KuenTly.Views.Clientes;
+using KuenTly.Views.Configuracion;
 using KuenTly.Views.Inicio;
 using KuenTly.Views.Recordatorios;
 using KuenTly.Views.Reportes;
@@ -48,6 +50,8 @@ namespace KuenTly
             builder.Services.AddSingleton<IReporteService, ReporteService>();
             builder.Services.AddSingleton<IPdfExportService, PdfExportService>();
             builder.Services.AddSingleton<IExcelExportService, ExcelExportService>();
+            builder.Services.AddSingleton<IBackupService, BackupService>();
+            builder.Services.AddSingleton<IArchivoGuardadorService, ArchivoGuardadorService>();
 
             builder.Services.AddTransient<InicioViewModel>();
             builder.Services.AddTransient<InicioPage>();
@@ -69,6 +73,8 @@ namespace KuenTly
             builder.Services.AddTransient<RecordatorioFormPage>();
             builder.Services.AddTransient<ReportesViewModel>();
             builder.Services.AddTransient<ReportesPage>();
+            builder.Services.AddTransient<ConfiguracionViewModel>();
+            builder.Services.AddTransient<ConfiguracionPage>();
 
             var app = builder.Build();
 
