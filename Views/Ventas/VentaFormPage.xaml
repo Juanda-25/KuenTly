@@ -4,7 +4,7 @@
              xmlns:vm="clr-namespace:KuenTly.ViewModels.Ventas"
              x:Class="KuenTly.Views.Ventas.VentaFormPage"
              x:DataType="vm:VentaFormViewModel"
-             Title="Nueva venta">
+             Title="{Binding Titulo}">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="14">

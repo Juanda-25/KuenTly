@@ -10,11 +10,16 @@ namespace KuenTly.ViewModels.Ventas
     {
         private readonly IVentaService _ventaService;
         private int _clienteId;
+        private int _ventaId;
+        private decimal _totalAbonadoActual;
 
         public VentaFormViewModel(IVentaService ventaService)
         {
             _ventaService = ventaService;
         }
+
+        [ObservableProperty]
+        public partial string Titulo { get; set; } = "Nueva venta";
 
         [ObservableProperty]
         public partial DateTime FechaVenta { get; set; } = DateTime.Now;
@@ -30,10 +35,35 @@ namespace KuenTly.ViewModels.Ventas
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            if (query.TryGetValue("ClienteId", out var valor) && int.TryParse(valor?.ToString(), out var id))
+            if (query.TryGetValue("ClienteId", out var clienteValor) && int.TryParse(clienteValor?.ToString(), out var clienteId))
             {
-                _clienteId = id;
+                _clienteId = clienteId;
             }
+
+            if (query.TryGetValue("VentaId", out var ventaValor) && int.TryParse(ventaValor?.ToString(), out var ventaId))
+            {
+                _ventaId = ventaId;
+                _ = CargarAsync();
+            }
+        }
+
+        private async Task CargarAsync()
+        {
+            await EjecutarSeguroAsync(async () =>
+            {
+                var venta = await _ventaService.ObtenerPorIdAsync(_ventaId);
+                if (venta is null)
+                    return;
+
+                Titulo = "Editar venta";
+                _clienteId = venta.ClienteId;
+                FechaVenta = venta.FechaVenta;
+                ValorTotal = venta.ValorTotal;
+                Descripcion = venta.Descripcion;
+                FechaPagoAcordada = venta.FechaPagoAcordada;
+
+                _totalAbonadoActual = venta.Abonos.Where(a => !a.Anulado).Sum(a => a.Valor);
+            });
         }
 
         [RelayCommand]
@@ -66,18 +96,40 @@ namespace KuenTly.ViewModels.Ventas
                 return;
             }
 
+            if (_ventaId != 0 && ValorTotal < _totalAbonadoActual)
+            {
+                MensajeError = $"El valor total no puede ser menor a lo ya abonado ($ {_totalAbonadoActual:N0}).";
+                return;
+            }
+
             await EjecutarSeguroAsync(async () =>
             {
-                var venta = new Venta
+                if (_ventaId == 0)
                 {
-                    ClienteId = _clienteId,
-                    FechaVenta = FechaVenta,
-                    ValorTotal = ValorTotal,
-                    FechaPagoAcordada = FechaPagoAcordada,
-                    Descripcion = Descripcion.Trim()
-                };
+                    var venta = new Venta
+                    {
+                        ClienteId = _clienteId,
+                        FechaVenta = FechaVenta,
+                        ValorTotal = ValorTotal,
+                        FechaPagoAcordada = FechaPagoAcordada,
+                        Descripcion = Descripcion.Trim()
+                    };
 
-                await _ventaService.CrearAsync(venta);
+                    await _ventaService.CrearAsync(venta);
+                }
+                else
+                {
+                    var venta = await _ventaService.ObtenerPorIdAsync(_ventaId);
+                    if (venta is null)
+                        return;
+
+                    venta.FechaVenta = FechaVenta;
+                    venta.ValorTotal = ValorTotal;
+                    venta.Descripcion = Descripcion.Trim();
+                    venta.FechaPagoAcordada = FechaPagoAcordada;
+
+                    await _ventaService.ActualizarAsync(venta);
+                }
 
                 await Shell.Current.GoToAsync("..");
             });

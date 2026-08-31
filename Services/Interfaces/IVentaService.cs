@@ -14,6 +14,8 @@ namespace KuenTly.Services.Interfaces
 
         Task<int> CrearAsync(Venta venta);
 
+        Task ActualizarAsync(Venta venta);
+
         Task EliminarAsync(int id);
     }
 }

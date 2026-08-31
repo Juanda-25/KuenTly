@@ -71,6 +71,14 @@ namespace KuenTly.Services.Implementations
             return venta.Id;
         }
 
+        public async Task ActualizarAsync(Venta venta)
+        {
+            using var context = await _contextFactory.CreateDbContextAsync();
+
+            context.Ventas.Update(venta);
+            await context.SaveChangesAsync();
+        }
+
         public async Task EliminarAsync(int id)
         {
             using var context = await _contextFactory.CreateDbContextAsync();

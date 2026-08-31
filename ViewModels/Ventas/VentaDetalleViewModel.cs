@@ -74,7 +74,7 @@ namespace KuenTly.ViewModels.Ventas
                 placeholder: "Ej: valor registrado por error");
 
             if (motivo is null)
-                return; // Canceló, no hacemos nada.
+                return;
 
             if (string.IsNullOrWhiteSpace(motivo))
             {
@@ -86,6 +86,31 @@ namespace KuenTly.ViewModels.Ventas
             {
                 await _abonoService.AnularAsync(abono.Id, motivo.Trim());
                 await CargarInternoAsync();
+            });
+        }
+
+        [RelayCommand]
+        private async Task EditarAsync()
+        {
+            await Shell.Current.GoToAsync($"{nameof(Views.Ventas.VentaFormPage)}?VentaId={_ventaId}");
+        }
+
+        [RelayCommand]
+        private async Task EliminarAsync()
+        {
+            var tieneAbonos = Abonos.Count > 0;
+            var mensaje = tieneAbonos
+                ? $"Esta venta ya tiene {Abonos.Count} abono(s) registrado(s). Si la eliminas, dejará de aparecer en el historial del cliente, pero los abonos permanecen guardados por seguridad. ¿Deseas continuar?"
+                : "¿Confirmas eliminar esta venta? Dejará de aparecer en el historial del cliente.";
+
+            var confirmar = await Shell.Current.DisplayAlertAsync("Eliminar venta", mensaje, "Sí, eliminar", "Cancelar");
+            if (!confirmar)
+                return;
+
+            await EjecutarSeguroAsync(async () =>
+            {
+                await _ventaService.EliminarAsync(_ventaId);
+                await Shell.Current.GoToAsync("..");
             });
         }
     }

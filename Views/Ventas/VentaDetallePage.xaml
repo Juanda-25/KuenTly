@@ -8,6 +8,11 @@
              x:Name="PageRoot"
              Title="Detalle de la venta">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Editar" Command="{Binding EditarCommand}" />
+        <ToolbarItem Text="Eliminar" Command="{Binding EliminarCommand}" />
+    </ContentPage.ToolbarItems>
+
     <Grid RowDefinitions="Auto,Auto,*" Padding="20,16">
 
         <VerticalStackLayout Grid.Row="0" Spacing="6">
